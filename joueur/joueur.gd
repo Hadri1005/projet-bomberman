@@ -59,6 +59,9 @@ func die() -> void:
 	get_tree().paused = true
 	
 func _physics_process(delta: float) -> void:
+	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

@@ -4,10 +4,15 @@
 [ext_resource type="Script" uid="uid://b6mdtuu1flkjn" path="res://button.gd" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c078thqfxo4xx" path="res://mort/mort.tscn" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://dpk4y2w7vrf8v" path="res://assets/Objects/Egg_item.png" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dbafs3jmseihr" path="res://wall/wall.tscn" id="6_wallscn"]
+[ext_resource type="Texture2D" uid="uid://bkaej7ut3m6nv" path="res://assets/Tilesets/Grass.png" id="5_lquwl"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_x8p52"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jnti"]
+atlas = ExtResource("5_lquwl")
+region = Rect2(0, 80.080765, 48.00676, 31.919235)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_x8p52"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(0.48242188, 0.001, 0.30639648)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8p52"]
 atlas = ExtResource("4_1bvp3")
@@ -25,17 +30,7 @@ font_size = 28
 transform = Transform3D(1, 0, 0, 0, 0.82493466, 0.5652281, 0, -0.5652281, 0.82493466, 0, 2.4843664, 3.3090448)
 
 [node name="CharacterBody3D" parent="." unique_id=2072773866 instance=ExtResource("1_ig7tw")]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1133335689]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.883317, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1210231476]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0783038, 0, 0)
-mesh = SubResource("BoxMesh_x8p52")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1291158801]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0783038, 0, 0)
-shape = SubResource("BoxShape3D_x8p52")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.101656, 0.83983135, 0.8121054)
 
 [node name="Button" type="Button" parent="." unique_id=762563097]
 offset_left = 2.0
@@ -74,6 +69,19 @@ expand_mode = 1
 layout_mode = 2
 text = "x5"
 label_settings = SubResource("LabelSettings_x8p52")
+
+[node name="wall" parent="." unique_id=967272797 instance=ExtResource("6_wallscn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7132025, 0.50074434, -0.6009971)
+
+[node name="ground" type="StaticBody3D" parent="." unique_id=1462267448]
+
+[node name="Sprite3D" type="Sprite3D" parent="ground" unique_id=1239350634]
+transform = Transform3D(20, 0, 0, 0, -8.742278e-07, -20, 0, 20, -8.742278e-07, 5, 0, 3)
+texture = SubResource("AtlasTexture_3jnti")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground" unique_id=278186792]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 4.9853516, 0, 3.0463867)
+shape = SubResource("BoxShape3D_lquwl")
 
 [connection signal="pressed" from="Button" to="CharacterBody3D" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

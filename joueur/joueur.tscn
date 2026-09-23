@@ -176,5 +176,4 @@ transform = Transform3D(9.6, 0, 0, 0, 9.6, 0, 0, 0, 9.6, 0, 0, 0)
 billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_bgbhk")
-animation = &"idle_south"
-frame_progress = 0.97311604
+animation = &"idle_east"

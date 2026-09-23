@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://dbafs3jmseihr"]
 
-[ext_resource type="Texture2D" uid="uid://c6d1fsbwylej0" path="res://assets/bricks-tileset/singles/bricks-tile-_00.png" id="1_m3bds"]
+[ext_resource type="Texture2D" uid="uid://c6d1fsbwylej0" path="res://assets/bricks-tileset/singles/bricks-tile-_00.png" id="1_sef87"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3jnti"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3bds"]
 albedo_color = Color(0.99215686, 1, 1, 1)
-albedo_texture = ExtResource("1_m3bds")
+albedo_texture = ExtResource("1_sef87")
+uv1_triplanar = true
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3jnti"]
 
