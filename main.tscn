@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://c7kgil8pdm1k3"]
 
 [ext_resource type="PackedScene" uid="uid://fjp4ytm60k1j" path="res://joueur/joueur.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://b6mdtuu1flkjn" path="res://button.gd" id="2_0xm2m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_x8p52"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x8p52"]
 
 [node name="bomberman" type="Node3D" unique_id=662595357]
 
@@ -9,6 +14,22 @@ transform = Transform3D(1, 0, 0, 0, 0.82493466, 0.5652281, 0, -0.5652281, 0.8249
 
 [node name="CharacterBody3D" parent="." unique_id=2072773866 instance=ExtResource("1_ig7tw")]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1975710678]
-transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 6.161573, 5.4887776)
-fov = 90.0
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1133335689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.883317, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1210231476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0783038, 0, 0)
+mesh = SubResource("BoxMesh_x8p52")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1291158801]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0783038, 0, 0)
+shape = SubResource("BoxShape3D_x8p52")
+
+[node name="Button" type="Button" parent="." unique_id=762563097]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Dmg"
+script = ExtResource("2_0xm2m")
+
+[connection signal="pressed" from="Button" to="CharacterBody3D" method="_on_button_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
