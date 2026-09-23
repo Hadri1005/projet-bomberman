@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://fjp4ytm60k1j"]
+
+[ext_resource type="Script" uid="uid://cjavgay80f04o" path="res://joueur/joueur.gd" id="1_bgbhk"]
+[ext_resource type="Texture2D" uid="uid://bclrhk07v1oni" path="res://Sans titre.png" id="2_ld8tl"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x8p52"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnbb7"]
+atlas = ExtResource("2_ld8tl")
+region = Rect2(237.23523, 118.51514, 289.89185, 238.64832)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pnbb7"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=2072773866]
+script = ExtResource("1_bgbhk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1454906721]
+mesh = SubResource("CapsuleMesh_x8p52")
+
+[node name="Sprite3D" type="Sprite3D" parent="MeshInstance3D" unique_id=292257439]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.5, 0.5098035)
+texture = SubResource("AtlasTexture_pnbb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=104331484]
+transform = Transform3D(1.04, 0, 0, 0, 2.15, 0, 0, 0, 1.005, 0, 0.075, 0)
+shape = SubResource("BoxShape3D_pnbb7")
