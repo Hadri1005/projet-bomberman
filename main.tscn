@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://fjp4ytm60k1j" path="res://joueur/joueur.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b6mdtuu1flkjn" path="res://button.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c078thqfxo4xx" path="res://mort/mort.tscn" id="3_h2yge"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_x8p52"]
 
@@ -30,6 +31,9 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Dmg"
 script = ExtResource("2_0xm2m")
+
+[node name="mort" parent="." unique_id=1865817844 instance=ExtResource("3_h2yge")]
+visible = false
 
 [connection signal="pressed" from="Button" to="CharacterBody3D" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
