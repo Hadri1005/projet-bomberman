@@ -9,10 +9,21 @@ var last_direction: String = "south"
 @onready var heart_container: HBoxContainer = get_node("../HUD/HeartContainer")
 @export var spawn_point: Vector3 = Vector3(0, 0, 0)
 const HEART_IMAGE = preload("res://assets/IconsOutline_16px/Icon51.png")
+@export var max_bombs: int = 5
+var current_bombs: int
+@onready var bomb_label: Label = get_node("../HUD/BombContainer/BombLabel")
 
 func _ready() -> void:
 	current_health = max_health
+	current_bombs = max_bombs
 	update_heart_display()
+	update_bomb_display()
+
+func update_bomb_display() -> void:
+	if bomb_label:
+		bomb_label.text = "x" + str(current_bombs)
+
+	
 		
 func take_damage() -> void:
 	current_health = clampi(current_health - 1, 0, max_health)
