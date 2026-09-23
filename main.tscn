@@ -11,7 +11,7 @@
 [node name="bomberman" type="Node3D" unique_id=662595357]
 
 [node name="DA SUN" type="DirectionalLight3D" parent="." unique_id=156880996]
-transform = Transform3D(1, 0, 0, 0, 0.82493466, 0.5652281, 0, -0.5652281, 0.82493466, 0, 1.4560716, 1.5276018)
+transform = Transform3D(1, 0, 0, 0, 0.82493466, 0.5652281, 0, -0.5652281, 0.82493466, 0, 2.4843664, 3.3090448)
 
 [node name="CharacterBody3D" parent="." unique_id=2072773866 instance=ExtResource("1_ig7tw")]
 
@@ -27,13 +27,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0783038, 0, 0)
 shape = SubResource("BoxShape3D_x8p52")
 
 [node name="Button" type="Button" parent="." unique_id=762563097]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 1.0
+offset_top = 87.0
+offset_right = 45.0
+offset_bottom = 118.0
 text = "Dmg"
 script = ExtResource("2_0xm2m")
 
 [node name="mort" parent="." unique_id=1865817844 instance=ExtResource("3_h2yge")]
 visible = false
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=894252036]
+
+[node name="HeartContainer" type="HBoxContainer" parent="HUD" unique_id=993218820]
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 145.0
+offset_bottom = 47.0
+theme_override_constants/separation = 3
 
 [connection signal="pressed" from="Button" to="CharacterBody3D" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

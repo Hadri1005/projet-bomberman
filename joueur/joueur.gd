@@ -6,18 +6,40 @@ const SPEED = 5.0
 var current_health: int
 var last_direction: String = "south"
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
-
+@onready var heart_container: HBoxContainer = get_node("../HUD/HeartContainer")
 @export var spawn_point: Vector3 = Vector3(0, 0, 0)
+const HEART_IMAGE = preload("res://assets/IconsOutline_16px/Icon51.png")
+
 func _ready() -> void:
 	current_health = max_health
-	
+	update_heart_display()
+		
 func take_damage() -> void:
 	current_health = clampi(current_health - 1, 0, max_health)
+	update_heart_display()
 	global_position = spawn_point 
 	print("Current Health: ", current_health)
 	if current_health <= 0:
 		die()
+
+func update_heart_display() -> void:
+	if not heart_container:
+		return
 		
+	for child in heart_container.get_children():
+		child.queue_free()
+		
+	for i in range(current_health):
+		var texture_rect = TextureRect.new()
+		texture_rect.texture = HEART_IMAGE
+		
+		texture_rect.custom_minimum_size = Vector2(32, 32)
+		texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		
+		heart_container.add_child(texture_rect)
+
+
 func die() -> void:
 	print("Player died!")
 	var death_screen = get_node_or_null("../mort")
