@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c7kgil8pdm1k3"]
+
+[node name="bomberman" type="Node3D" unique_id=662595357]
+
+[node name="DA SUN" type="DirectionalLight3D" parent="." unique_id=156880996]
+transform = Transform3D(1, 0, 0, 0, 0.82493466, 0.5652281, 0, -0.5652281, 0.82493466, 0, 1.4560716, 1.5276018)
