@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dbafs3jmseihr"]
 
-[ext_resource type="Texture2D" uid="uid://c6d1fsbwylej0" path="res://bricks-tileset/singles/bricks-tile-_00.png" id="1_m3bds"]
+[ext_resource type="Texture2D" uid="uid://c6d1fsbwylej0" path="res://assets/bricks-tileset/singles/bricks-tile-_00.png" id="1_m3bds"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3jnti"]
 
