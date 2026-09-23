@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dbafs3jmseihr"]
+
+[ext_resource type="Texture2D" uid="uid://c6d1fsbwylej0" path="res://bricks-tileset/singles/bricks-tile-_00.png" id="1_m3bds"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3jnti"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3bds"]
+albedo_color = Color(0.99215686, 1, 1, 1)
+albedo_texture = ExtResource("1_m3bds")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3jnti"]
+
+[node name="wall" type="StaticBody3D" unique_id=967272797]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1086358086]
+mesh = SubResource("BoxMesh_3jnti")
+surface_material_override/0 = SubResource("StandardMaterial3D_m3bds")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=169498337]
+shape = SubResource("BoxShape3D_3jnti")
