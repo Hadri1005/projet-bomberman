@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dp5a7xiwouvh2" path="res://assets/Characters/Basic Charakter Spritesheet.png" id="2_ld8tl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pnbb7"]
+size = Vector3(0.6748047, 0.8602295, 0.6869507)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ld8tl"]
 atlas = ExtResource("2_ld8tl")
@@ -164,7 +165,7 @@ animations = [{
 script = ExtResource("1_bgbhk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=104331484]
-transform = Transform3D(1.04, 0, 0, 0, 1.88, 0, 0, 0, 1.005, 0, 0.075, 0)
+transform = Transform3D(1.04, 0, 0, 0, 1.88, 0, 0, 0, 1.005, 0.0055859387, -0.05638428, 0.008986354)
 shape = SubResource("BoxShape3D_pnbb7")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=712657095]

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cs2r1pnsy5ynk"]
+
+[ext_resource type="PackedScene" uid="uid://dbafs3jmseihr" path="res://wall/wall.tscn" id="1_nq2un"]
+[ext_resource type="PackedScene" uid="uid://bkbs5ocgidmyr" path="res://ground/ground.tscn" id="2_36pss"]
+
+[node name="librarySource" type="Node3D" unique_id=1685563443]
+
+[node name="wall" parent="." unique_id=967272797 instance=ExtResource("1_nq2un")]
+
+[node name="ground" parent="." unique_id=1423755338 instance=ExtResource("2_36pss")]

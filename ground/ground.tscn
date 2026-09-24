@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bkbs5ocgidmyr"]
+
+[ext_resource type="Texture2D" uid="uid://bkaej7ut3m6nv" path="res://assets/Tilesets/Grass.png" id="1_nnmag"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3jnti"]
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xtua"]
+albedo_texture = ExtResource("1_nnmag")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_offset = Vector3(0.2, 0.1, 0)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ves1e"]
+size = Vector3(1, 0.001, 1)
+
+[node name="ground" type="MeshInstance3D" unique_id=261526397]
+transform = Transform3D(3, 0, 0, 0, -1.3113416e-07, -3, 0, 3, -1.3113416e-07, 0, 0, 0)
+mesh = SubResource("BoxMesh_3jnti")
+surface_material_override/0 = SubResource("StandardMaterial3D_4xtua")
+
+[node name="staticbody3D" type="StaticBody3D" parent="." unique_id=1423755338]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="staticbody3D" unique_id=2065282489]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_ves1e")
