@@ -169,7 +169,7 @@ transform = Transform3D(1.04, 0, 0, 0, 1.88, 0, 0, 0, 1.005, 0.0055859387, -0.05
 shape = SubResource("BoxShape3D_pnbb7")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=712657095]
-transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 6.161573, 5.4887776)
+transform = Transform3D(1, 0, 0, 0, 0.39073107, 0.92050487, 0, -0.92050487, 0.39073107, 0, 8.4776, 3.180387)
 fov = 90.0
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=669150896]

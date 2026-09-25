@@ -3,26 +3,36 @@
 [ext_resource type="PackedScene" uid="uid://fjp4ytm60k1j" path="res://joueur/joueur.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b6mdtuu1flkjn" path="res://button.gd" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c078thqfxo4xx" path="res://mort/mort.tscn" id="3_h2yge"]
-[ext_resource type="Texture2D" uid="uid://dpk4y2w7vrf8v" path="res://assets/Objects/Egg_item.png" id="4_1bvp3"]
+[ext_resource type="Shader" uid="uid://b14f8gx0pk62n" path="res://main.gdshader" id="5_lquwl"]
+[ext_resource type="CompressedCubemap" uid="uid://dt5alv272g8c" path="res://assets/sky/cubemap_2x3.png" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://dsfxfkfq8diy2" path="res://bombe/bombe.tscn" id="7_5vw27"]
 [ext_resource type="MeshLibrary" uid="uid://c3nobm0p6lbc7" path="res://librarySource/items_library.res" id="7_272bh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x8p52"]
-atlas = ExtResource("4_1bvp3")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
+shader = ExtResource("5_lquwl")
+shader_parameter/source_panorama = ExtResource("6_7mycd")
+shader_parameter/exposure = 1.0
 
-[sub_resource type="SystemFont" id="SystemFont_lquwl"]
-font_names = PackedStringArray("Comic Sans MS")
+[sub_resource type="Sky" id="Sky_70ykq"]
+sky_material = SubResource("ShaderMaterial_7mycd")
 
-[sub_resource type="LabelSettings" id="LabelSettings_x8p52"]
-font = SubResource("SystemFont_lquwl")
-font_size = 28
+[sub_resource type="Environment" id="Environment_x8p52"]
+background_mode = 2
+sky = SubResource("Sky_70ykq")
 
 [node name="bomberman" type="Node3D" unique_id=662595357]
 
 [node name="light" type="DirectionalLight3D" parent="." unique_id=156880996]
 transform = Transform3D(1, 0, 0, 0, 0.82493466, 0.5652281, 0, -0.5652281, 0.82493466, 5, 6.4843664, 8.309045)
+light_specular = 0.0
+shadow_enabled = true
+shadow_opacity = 0.6
 
 [node name="player" parent="." unique_id=2072773866 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.101656, 0.83983135, 0.8121054)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.549369, 0.83983135, 0.8121054)
+max_health = 3
+spawn_point = Vector3(0, 0, 0)
+max_bombs = 5
 
 [node name="Button" type="Button" parent="." unique_id=762563097]
 offset_left = 2.0
@@ -44,24 +54,6 @@ offset_right = 145.0
 offset_bottom = 47.0
 theme_override_constants/separation = 3
 
-[node name="BombContainer" type="HBoxContainer" parent="HUD" unique_id=927257788]
-offset_left = 8.0
-offset_top = 56.0
-offset_right = 100.0
-offset_bottom = 96.0
-theme_override_constants/separation = 2
-
-[node name="BombIcon" type="TextureRect" parent="HUD/BombContainer" unique_id=196252567]
-custom_minimum_size = Vector2(37, 0)
-layout_mode = 2
-texture = SubResource("AtlasTexture_x8p52")
-expand_mode = 1
-
-[node name="BombLabel" type="Label" parent="HUD/BombContainer" unique_id=1480810361]
-layout_mode = 2
-text = "x5"
-label_settings = SubResource("LabelSettings_x8p52")
-
 [node name="GridMap" type="GridMap" parent="." unique_id=1714787730]
 mesh_library = ExtResource("7_272bh")
 cell_size = Vector3(1, 1, 1)
@@ -69,6 +61,13 @@ cell_center_y = false
 data = {
 "cells": PackedInt32Array(0, 0, 1507331, 1, 0, 1507331, 2, 0, 1507331, 2, 1, 1507331, 1, 1, 2, 3, 2, 1507331, 4, 1, 1507331, 5, 1, 2, 4, 0, 1507331, 3, 0, 1507331, 3, 1, 2, 6, 1, 1507331, 6, 0, 1507331, 7, 0, 1507331, 5, 0, 1507331, 7, 1, 2, 8, 1, 1507331, 5, 2, 1507331, 4, 3, 1507331, 3, 3, 2, 5, 3, 2, 9, 2, 1507331, 10, 2, 1507331, 11, 2, 1507331, 8, 3, 1507331, 7, 3, 2, 6, 3, 1507331, 5, 4, 262147, 4, 4, 262147, 3, 4, 262147, 2, 4, 262147, 1, 4, 1507331, 2, 3, 1507331, 0, 5, 1507331, 0, 6, 1507331, 1, 6, 1507331, 1, 5, 2, 2, 5, 1507331, 2, 6, 1507331, 3, 5, 2, 3, 6, 1507331, 4, 6, 1507331, 4, 5, 1507331, 5, 6, 1507331, 5, 5, 2, 6, 6, 1507331, 6, 5, 1507331, 7, 5, 2, 7, 4, 1507331, 6, 4, 262147, 7, 6, 1507331, 8, 6, 1507331, 8, 5, 1507331, 8, 4, 1507331, 9, 3, 2, 9, 1, 2, 10, 1, 1507331, 9, 0, 1507331, 8, 0, 1507331, 10, 0, 1507331, 11, 0, 1507331, 11, 1, 1507331, 9, 4, 1507331, 9, 5, 2, 9, 6, 1507331, 10, 5, 1507331, 10, 4, 1507331, 10, 3, 1507331, 11, 3, 1507331, 11, 4, 1507331, 10, 6, 1507331, 11, 5, 1507331, 11, 6, 1507331, 2, 2, 262147, 4, 2, 262147, 6, 2, 262147, 7, 2, 262147, 8, 2, 262147, 1, 2, 1507331, 1, 3, 655362, 0, 3, 1507331, 0, 4, 1507331, 0, 2, 1507331, 0, 1, 1507331)
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1905860090]
+environment = SubResource("Environment_x8p52")
+
+[node name="bombe" parent="." unique_id=131059670 instance=ExtResource("7_5vw27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.60089564, 0.57053196, 2.241513)
+visible = false
 
 [connection signal="pressed" from="Button" to="player" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

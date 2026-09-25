@@ -1,0 +1,28 @@
+[remap]
+
+importer="cubemap_texture"
+type="CompressedCubemap"
+uid="uid://cogcigqygvq7t"
+path.s3tc="res://.godot/imported/px.png-258b027393cf2bba7ce0ab0921f12fac.s3tc.ccube"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://assets/sky/px.png"
+dest_files=["res://.godot/imported/px.png-258b027393cf2bba7ce0ab0921f12fac.s3tc.ccube"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+slices/arrangement=1

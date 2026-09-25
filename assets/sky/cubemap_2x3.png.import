@@ -1,0 +1,27 @@
+[remap]
+
+importer="cubemap_texture"
+type="CompressedCubemap"
+uid="uid://dt5alv272g8c"
+path="res://.godot/imported/cubemap_2x3.png-dea50bfab2f54ee55d94cc7be127bf73.ccube"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/sky/cubemap_2x3.png"
+dest_files=["res://.godot/imported/cubemap_2x3.png-dea50bfab2f54ee55d94cc7be127bf73.ccube"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/arrangement=1
