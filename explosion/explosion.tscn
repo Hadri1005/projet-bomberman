@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c7p0755thq3yb"]
 
 [ext_resource type="Texture2D" uid="uid://bkmblra1cp3x5" path="res://assets/Explosion-Pack.png" id="1_echoh"]
+[ext_resource type="Script" uid="uid://bsr5eaut2cmv4" path="res://explosion/explosion.gd" id="1_pim3w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pim3w"]
 atlas = ExtResource("1_echoh")
@@ -47,15 +48,19 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6c071")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"explosion",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [node name="explosion" type="Node3D" unique_id=1805997717]
+script = ExtResource("1_pim3w")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=947740235]
+transform = Transform3D(6.585, 0, 0, 0, 6.585, 0, 0, 0, 6.585, 0, 0, 0)
+billboard = 1
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_3jnti")
 animation = &"explosion"
 frame = 5
-frame_progress = 0.47801322
+frame_progress = 1.0

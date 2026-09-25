@@ -1,14 +1,16 @@
 extends CharacterBody3D
 
+@onready var grid_map: GridMap = get_node("../GridMap") 
 const BOMB_SCENE = preload("res://bombe/bombe.tscn")
-const TILE_SIZE = 2.0
+const TILE_SIZE = 1.0
 const SPEED = 5.0
+const BOMB_Y_HEIGHT = 0.5
 @export var max_health: int = 3
 var current_health: int
 var last_direction: String = "south"
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 @onready var heart_container: HBoxContainer = get_node("../HUD/HeartContainer")
-@export var spawn_point: Vector3 = Vector3(0, 0, 0)
+@export var spawn_point: Vector3 = Vector3(1, 0.8, 1)
 const HEART_IMAGE = preload("res://assets/IconsOutline_16px/Icon51.png")
 @export var max_bombs: int = 5
 var current_bombs: int
@@ -56,11 +58,9 @@ func die() -> void:
 	get_tree().paused = true
 	
 func _physics_process(delta: float) -> void:
-	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
@@ -69,6 +69,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * SPEED
 		
 		last_direction = get_cardinal_direction(direction)
+		last_move_direction = direction  # <-- ajouté ici
 		sprite.play("walk_" + last_direction)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -103,18 +104,29 @@ func _input(event):
 func place_bomb():
 	var bomb = BOMB_SCENE.instantiate()
 	get_tree().current_scene.add_child(bomb)
-	bomb.global_position = global_position.snapped(Vector3.ONE * TILE_SIZE)
+	
+	var cell = grid_map.local_to_map(grid_map.to_local(global_position))
+	var snapped_pos = grid_map.to_global(grid_map.map_to_local(cell))
+	
+	bomb.global_position = Vector3(snapped_pos.x, global_position.y- 0.5, snapped_pos.z)
 	bomb.ignore_player(self)
 	bombs_placed += 1
 	bomb.tree_exited.connect(func(): bombs_placed -= 1)
-
+	
 func try_kick_bomb():
-	# on tire un raycast dans la direction où regarde le joueur
+	var kick_dir = get_cardinal_vector(last_move_direction)
 	var space_state = get_world_3d().direct_space_state
 	var from = global_position
-	var to = from + last_move_direction * (TILE_SIZE * 0.7)
+	var to = from + kick_dir * (TILE_SIZE * 1.2)
 	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
 	
 	if result and result.collider.has_method("kick"):
-		result.collider.kick(last_move_direction)
+		result.collider.kick(kick_dir)
+
+func get_cardinal_vector(dir: Vector3) -> Vector3:
+	if abs(dir.x) > abs(dir.z):
+		return Vector3(sign(dir.x), 0, 0)
+	else:
+		return Vector3(0, 0, sign(dir.z))

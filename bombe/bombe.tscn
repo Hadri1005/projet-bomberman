@@ -11,9 +11,11 @@ atlas = ExtResource("1_mpodx")
 [sub_resource type="BoxShape3D" id="BoxShape3D_1nppc"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=587597456]
+collision_layer = 2
 script = ExtResource("1_blhvy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1809496990]
+transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, 0, 0, 0)
 shape = SubResource("BoxShape3D_blhvy")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=216638363]
@@ -26,7 +28,9 @@ texture = SubResource("AtlasTexture_mpodx")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1557287477]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+collision_layer = 2
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=264030107]
-transform = Transform3D(1.14, 0, 0, 0, 1.14, 0, 0, 0, 1.14, 0, 0, 0)
+transform = Transform3D(1.365, 0, 0, 0, 1.365, 0, 0, 0, 1.365, 0, 0, 0)
 shape = SubResource("BoxShape3D_1nppc")

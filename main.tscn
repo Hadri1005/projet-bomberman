@@ -81,7 +81,6 @@ environment = SubResource("Environment_x8p52")
 
 [node name="bombe" parent="." unique_id=131059670 instance=ExtResource("7_5vw27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.60089564, 0.57053196, 2.241513)
-visible = false
 
 [connection signal="pressed" from="Button" to="player" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

@@ -4,7 +4,7 @@ const SPEED = 2.0
 const GRAVITY = 9.8
 
 const GRID_MIN = 0
-const GRID_MAX = 15
+const GRID_MAX = 14
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 var cases_occupees := []
