@@ -3,8 +3,8 @@ extends CharacterBody3D
 const SPEED = 2.0
 const GRAVITY = 9.8
 
-const GRID_MIN = 3
-const GRID_MAX = 13
+const GRID_MIN = 0
+const GRID_MAX = 15
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 var cases_occupees := []
@@ -60,7 +60,7 @@ func deplacement_bot() -> void:
 
 		var nouvelle_cellule: Vector2i = cellule_actuelle + direction_choisie
 		var cible_xz := Vector2(nouvelle_cellule.x + 0.5, nouvelle_cellule.y + 0.5)
-		print("JE SUIS A : ", Vector2(position.x, position.z), "JE VAIS A ", cible_xz)
+		# print("JE SUIS A : ", Vector2(position.x, position.z), "JE VAIS A ", cible_xz)
 		while Vector2(position.x, position.z).distance_to(cible_xz) > 0.05:
 			var dir2 := (cible_xz - Vector2(position.x, position.z)).normalized()
 			velocity.x = dir2.x * SPEED
@@ -80,8 +80,8 @@ func get_spawn_cell() -> Vector2i:
 	var x: int
 	var z: int
 	while true:
-		x = randi_range(GRID_MIN, GRID_MAX)
-		z = randi_range(GRID_MIN, GRID_MAX)
+		x = randi_range(GRID_MIN + 5, GRID_MAX)
+		z = randi_range(GRID_MIN + 5, GRID_MAX)
 		var tmp := Vector2i(x, z)
 		if is_mur(tmp):
 			continue
