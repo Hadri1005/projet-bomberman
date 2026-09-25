@@ -1,76 +1,88 @@
-[gd_scene format=3 uid="uid://fjp4ytm60k1j"]
+[gd_scene format=3 uid="uid://b3jiwc7v374bo"]
 
-[ext_resource type="Script" uid="uid://cjavgay80f04o" path="res://joueur/joueur.gd" id="1_bgbhk"]
-[ext_resource type="Texture2D" uid="uid://dp5a7xiwouvh2" path="res://assets/Characters/Basic Charakter Spritesheet.png" id="2_ld8tl"]
+[ext_resource type="Texture2D" uid="uid://bd1is4wc1i6of" path="res://assets/sky/sky_100_2k.png" id="1_jjntt"]
+[ext_resource type="Script" uid="uid://4rmm0ib27yi8" path="res://play/play.gd" id="2_fh22g"]
+[ext_resource type="Texture2D" uid="uid://dp5a7xiwouvh2" path="res://assets/Characters/Basic Charakter Spritesheet.png" id="2_ogyno"]
+[ext_resource type="Script" uid="uid://6fhn8bag5106" path="res://play/joueurMenu.gd" id="3_j1i6c"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_pnbb7"]
-size = Vector3(0.6748047, 0.8602295, 0.6869507)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aw4yl"]
+panorama = ExtResource("1_jjntt")
+
+[sub_resource type="Sky" id="Sky_86l7k"]
+sky_material = SubResource("PanoramaSkyMaterial_aw4yl")
+
+[sub_resource type="Environment" id="Environment_hnoe2"]
+background_mode = 2
+sky = SubResource("Sky_86l7k")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ppeyn"]
+font_size = 90
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ld8tl"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(0, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tefl2"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(48, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ll0ur"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(0, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0gvd"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(48, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xqvgb"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_720wf"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p2daq"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(0, 96, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pln42"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(48, 96, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jlblc"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(96, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gq5fc"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(144, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f0xef"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(96, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pin7l"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(144, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o42at"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uswo7"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dasju"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(96, 96, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_plyhm"]
-atlas = ExtResource("2_ld8tl")
+atlas = ExtResource("2_ogyno")
 region = Rect2(144, 96, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bgbhk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_j1i6c"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -161,22 +173,57 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=2072773866]
-collision_mask = 3
-script = ExtResource("1_bgbhk")
+[node name="play" type="Control" unique_id=1028553168]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=104331484]
-transform = Transform3D(1.04, 0, 0, 0, 1.88, 0, 0, 0, 1.005, 0.0055859387, -0.05638428, 0.008986354)
-shape = SubResource("BoxShape3D_pnbb7")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=871357480]
+environment = SubResource("Environment_hnoe2")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=712657095]
-transform = Transform3D(1, 0, 0, 0, 0.39073107, 0.92050487, 0, -0.92050487, 0.39073107, 0, 8.4776, 3.180387)
-current = true
-fov = 90.0
+[node name="Label" type="Label" parent="." unique_id=623609711]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 260.0
+offset_top = 46.0
+offset_right = 898.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "BomberMouse"
+label_settings = SubResource("LabelSettings_ppeyn")
+horizontal_alignment = 1
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=669150896]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1347164012]
+layout_mode = 1
+offset_left = 437.18
+offset_top = 253.0
+offset_right = 722.17834
+offset_bottom = 495.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=976563301]
+layout_mode = 2
+text = "Start"
+script = ExtResource("2_fh22g")
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1501890267]
+layout_mode = 2
+text = "Settings"
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=2091091007]
 transform = Transform3D(9.6, 0, 0, 0, 9.6, 0, 0, 0, 9.6, 0, 0, 0)
 billboard = 1
 texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_bgbhk")
+sprite_frames = SubResource("SpriteFrames_j1i6c")
 animation = &"idle_east"
+script = ExtResource("3_j1i6c")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=674998189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 3.3, 5.27)
+current = true

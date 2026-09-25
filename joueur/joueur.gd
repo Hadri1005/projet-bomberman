@@ -10,7 +10,7 @@ var current_health: int
 var last_direction: String = "south"
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 @onready var heart_container: HBoxContainer = get_node("../HUD/HeartContainer")
-@export var spawn_point: Vector3 = Vector3(1, 0.8, 1)
+@export var spawn_point: Vector3 = Vector3(0.5, 0.8, 0.5)
 const HEART_IMAGE = preload("res://assets/IconsOutline_16px/Icon51.png")
 @export var max_bombs: int = 5
 var current_bombs: int
@@ -52,6 +52,7 @@ func update_heart_display() -> void:
 
 func die() -> void:
 	print("Player died!")
+	get_node("../mort/Camera3D").make_current()
 	var death_screen = get_node_or_null("../mort")
 	if death_screen:
 		death_screen.show()

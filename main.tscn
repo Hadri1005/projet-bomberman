@@ -15,12 +15,12 @@ shader = ExtResource("5_lquwl")
 shader_parameter/source_panorama = ExtResource("6_7mycd")
 shader_parameter/exposure = 1.0
 
-[sub_resource type="Sky" id="Sky_70ykq"]
+[sub_resource type="Sky" id="Sky_efxa6"]
 sky_material = SubResource("ShaderMaterial_7mycd")
 
 [sub_resource type="Environment" id="Environment_x8p52"]
 background_mode = 2
-sky = SubResource("Sky_70ykq")
+sky = SubResource("Sky_efxa6")
 
 [node name="bomberman" type="Node3D" unique_id=662595357]
 
@@ -80,7 +80,8 @@ data = {
 environment = SubResource("Environment_x8p52")
 
 [node name="bombe" parent="." unique_id=131059670 instance=ExtResource("7_5vw27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.60089564, 0.57053196, 2.241513)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8650048, 0.57053196, 2.241513)
+visible = false
 
 [connection signal="pressed" from="Button" to="player" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

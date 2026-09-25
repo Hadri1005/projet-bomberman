@@ -9,7 +9,7 @@ const GRID_MAX = 14
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 var cases_occupees := []
 var direction_actuelle := "south"
-var cellule_actuelle: Vector2i  # source de vérité, jamais recalculée depuis position
+var cellule_actuelle: Vector2i  # source de verite, jamais recalculee depuis position
 
 func _ready() -> void:
 	cellule_actuelle = get_spawn_cell()
@@ -38,6 +38,10 @@ func direction_name(d: Vector2i) -> String:
 
 func deplacement_bot() -> void:
 	while true:
+		# Si le noeud a ete libere (reload de scene, mort...), on arrete la coroutine
+		if not is_instance_valid(self) or not is_inside_tree():
+			return
+
 		var directions: Array[Vector2i] = [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]
 		directions.shuffle()
 
@@ -60,12 +64,18 @@ func deplacement_bot() -> void:
 
 		var nouvelle_cellule: Vector2i = cellule_actuelle + direction_choisie
 		var cible_xz := Vector2(nouvelle_cellule.x + 0.5, nouvelle_cellule.y + 0.5)
-		# print("JE SUIS A : ", Vector2(position.x, position.z), "JE VAIS A ", cible_xz)
 		while Vector2(position.x, position.z).distance_to(cible_xz) > 0.05:
+			# Verifie a chaque frame physique que le noeud existe encore
+			if not is_instance_valid(self) or not is_inside_tree():
+				return
 			var dir2 := (cible_xz - Vector2(position.x, position.z)).normalized()
 			velocity.x = dir2.x * SPEED
 			velocity.z = dir2.y * SPEED
 			await get_tree().physics_frame
+
+		# Verifie apres l'await que le noeud est toujours valide
+		if not is_instance_valid(self) or not is_inside_tree():
+			return
 
 		position.x = cible_xz.x
 		position.z = cible_xz.y

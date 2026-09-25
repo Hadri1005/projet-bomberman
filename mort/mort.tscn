@@ -1,13 +1,28 @@
 [gd_scene format=3 uid="uid://c078thqfxo4xx"]
 
 [ext_resource type="Script" uid="uid://fhyc4hswoq1q" path="res://mort/mort.gd" id="1_nspwh"]
+[ext_resource type="Shader" uid="uid://b14f8gx0pk62n" path="res://main.gdshader" id="2_3pufo"]
+[ext_resource type="CompressedCubemap" uid="uid://dt5alv272g8c" path="res://assets/sky/cubemap_2x3.png" id="3_1ix43"]
 
 [sub_resource type="SystemFont" id="SystemFont_nspwh"]
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_rn2ns"]
 font = SubResource("SystemFont_nspwh")
 
 [sub_resource type="Theme" id="Theme_x8p52"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2mgty"]
+shader = ExtResource("2_3pufo")
+shader_parameter/source_panorama = ExtResource("3_1ix43")
+shader_parameter/exposure = 1.0
+
+[sub_resource type="Sky" id="Sky_70ykq"]
+sky_material = SubResource("ShaderMaterial_2mgty")
+
+[sub_resource type="Environment" id="Environment_7utou"]
+background_mode = 2
+sky = SubResource("Sky_70ykq")
 
 [node name="Control" type="Control" unique_id=1865817844]
 layout_mode = 3
@@ -17,15 +32,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nspwh")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1391223514]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
 
 [node name="Label" type="Label" parent="." unique_id=2074020370]
 layout_mode = 1
@@ -76,6 +82,12 @@ offset_bottom = 51.695007
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quitter le jeu"
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=746284806]
+transform = Transform3D(1, 0, 0, 0, 0.7431448, -0.6691306, 0, 0.6691306, 0.7431448, 0, 6.1660895, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=134621844]
+environment = SubResource("Environment_7utou")
 
 [connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
