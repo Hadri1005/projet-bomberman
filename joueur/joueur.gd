@@ -12,7 +12,7 @@ var last_direction: String = "south"
 @onready var heart_container: HBoxContainer = get_node("../HUD/HeartContainer")
 @export var spawn_point: Vector3 = Vector3(0.5, 0.8, 0.5)
 const HEART_IMAGE = preload("res://assets/IconsOutline_16px/Icon51.png")
-@export var max_bombs: int = 5
+@export var max_bombs: int = 1
 var current_bombs: int
 var bombs_placed = 0
 var last_move_direction = Vector3.FORWARD
