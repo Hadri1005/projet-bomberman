@@ -13,13 +13,11 @@ var last_direction: String = "south"
 @export var spawn_point: Vector3 = Vector3(0.5, 0.8, 0.5)
 const HEART_IMAGE = preload("res://assets/IconsOutline_16px/Icon51.png")
 @export var max_bombs: int = 1
-var current_bombs: int
 var bombs_placed = 0
 var last_move_direction = Vector3.FORWARD
 
 func _ready() -> void:
 	current_health = max_health
-	current_bombs = max_bombs
 	update_heart_display()
 
 	
@@ -131,3 +129,6 @@ func get_cardinal_vector(dir: Vector3) -> Vector3:
 		return Vector3(sign(dir.x), 0, 0)
 	else:
 		return Vector3(0, 0, sign(dir.z))
+func add_bomb_capacity(amount: int = 1) -> void:
+	max_bombs += amount
+	print("Max bombs: ", max_bombs)
