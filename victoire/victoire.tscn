@@ -1,0 +1,259 @@
+[gd_scene format=3 uid="uid://ckd1gy7r7biuu"]
+
+[ext_resource type="Script" uid="uid://bv0jpg84uc21i" path="res://victoire/victoire.gd" id="1_2g4ft"]
+[ext_resource type="Shader" uid="uid://b14f8gx0pk62n" path="res://main.gdshader" id="1_aya38"]
+[ext_resource type="CompressedCubemap" uid="uid://dt5alv272g8c" path="res://assets/sky/cubemap_2x3.png" id="2_6fdfk"]
+[ext_resource type="Texture2D" uid="uid://dp5a7xiwouvh2" path="res://assets/Characters/Basic Charakter Spritesheet.png" id="3_hy4lw"]
+[ext_resource type="Script" uid="uid://6fhn8bag5106" path="res://play/joueurMenu.gd" id="4_2g4ft"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hy4lw"]
+shader = ExtResource("1_aya38")
+shader_parameter/source_panorama = ExtResource("2_6fdfk")
+shader_parameter/exposure = 1.0
+
+[sub_resource type="Sky" id="Sky_efxa6"]
+sky_material = SubResource("ShaderMaterial_hy4lw")
+
+[sub_resource type="Environment" id="Environment_2g4ft"]
+background_mode = 2
+sky = SubResource("Sky_efxa6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_aya38"]
+font_size = 52
+
+[sub_resource type="Theme" id="Theme_aya38"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld8tl"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tefl2"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll0ur"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0gvd"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqvgb"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_720wf"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2daq"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pln42"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlblc"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gq5fc"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(144, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0xef"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pin7l"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o42at"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uswo7"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dasju"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plyhm"]
+atlas = ExtResource("3_hy4lw")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fv8xf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ld8tl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tefl2")
+}],
+"loop": 1,
+"name": &"idle_east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll0ur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0gvd")
+}],
+"loop": 1,
+"name": &"idle_north",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqvgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_720wf")
+}],
+"loop": 1,
+"name": &"idle_south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2daq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pln42")
+}],
+"loop": 1,
+"name": &"idle_west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlblc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gq5fc")
+}],
+"loop": 1,
+"name": &"walk_east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0xef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pin7l")
+}],
+"loop": 1,
+"name": &"walk_north",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o42at")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uswo7")
+}],
+"loop": 1,
+"name": &"walk_south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dasju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plyhm")
+}],
+"loop": 1,
+"name": &"walk_west",
+"speed": 5.0
+}]
+
+[node name="Node3D" type="Node3D" unique_id=1702076972]
+script = ExtResource("1_2g4ft")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=366962350]
+environment = SubResource("Environment_2g4ft")
+
+[node name="Label" type="Label" parent="." unique_id=1920115131]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -273.5
+offset_top = 100.0
+offset_right = 273.5
+offset_bottom = 276.0
+grow_horizontal = 2
+text = "Victoire!!"
+label_settings = SubResource("LabelSettings_aya38")
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="." unique_id=83026537]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -15.5
+offset_right = 52.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_aya38")
+text = "Recomencer"
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1484024545]
+transform = Transform3D(1, 0, 0, 0, 0.7431448, -0.6691306, 0, 0.6691306, 0.7431448, 0, 23.85648, 6.497555)
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=363326285]
+transform = Transform3D(9.6, 0, 0, 0, 9.6, 0, 0, 0, 9.6, 0, 24.920448, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_fv8xf")
+animation = &"idle_east"
+script = ExtResource("4_2g4ft")
+
+[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="." unique_id=1272506616]
+transform = Transform3D(9.6, 0, 0, 0, 9.6, 0, 0, 0, 9.6, -2.2153263, 24.920448, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_fv8xf")
+animation = &"idle_east"
+script = ExtResource("4_2g4ft")
+decalage = 6.0
+
+[node name="AnimatedSprite3D3" type="AnimatedSprite3D" parent="." unique_id=505180378]
+transform = Transform3D(9.6, 0, 0, 0, 9.6, 0, 0, 0, 9.6, -1.1336088, 24.920448, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_fv8xf")
+animation = &"idle_east"
+script = ExtResource("4_2g4ft")
+decalage = 12.0
+
+[node name="QuitButton" type="Button" parent="." unique_id=1158686258]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = 20.695007
+offset_right = 55.0
+offset_bottom = 51.695007
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quitter le jeu"
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

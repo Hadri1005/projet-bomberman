@@ -8,6 +8,7 @@ const EXPLOSION_SCENE = preload("res://explosion/explosion.tscn")
 var is_moving = false
 var move_direction = Vector3.ZERO
 var blink_tween: Tween = null
+var owner_player: Node3D = null
 
 var ignored_players: Array[Node3D] = []
 
@@ -144,16 +145,16 @@ func explode():
 	queue_free()
 	
 func _hit_entities_in(cells: Array[Vector3i]) -> void:
-	# Ennemis : disparaissent
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		if _is_in_cells(enemy, cells):
+			if is_instance_valid(owner_player) and owner_player.has_method("add_kill"):
+				owner_player.add_kill()
 			enemy.queue_free()
 
-	# Joueurs : prennent des dégâts
 	for player in get_tree().get_nodes_in_group("player"):
 		if _is_in_cells(player, cells) and player.has_method("take_damage"):
 			player.take_damage()
-
+			
 func _is_in_cells(body: Node3D, cells: Array[Vector3i]) -> bool:
 	if not is_instance_valid(body) or body.is_queued_for_deletion():
 		return false

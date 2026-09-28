@@ -212,10 +212,6 @@ layout_mode = 2
 text = "Start"
 script = ExtResource("2_fh22g")
 
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1501890267]
-layout_mode = 2
-text = "Settings"
-
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=2091091007]
 transform = Transform3D(9.6, 0, 0, 0, 9.6, 0, 0, 0, 9.6, 0, 0, 0)
 billboard = 1

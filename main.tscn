@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c7kgil8pdm1k3"]
 
+[ext_resource type="Script" uid="uid://d382t8u13kj4s" path="res://main.gd" id="1_4c57u"]
 [ext_resource type="PackedScene" uid="uid://fjp4ytm60k1j" path="res://joueur/joueur.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dgdlguhju0fcm" path="res://ennemi/ennemi.tscn" id="2_5vw27"]
 [ext_resource type="PackedScene" uid="uid://c078thqfxo4xx" path="res://mort/mort.tscn" id="3_h2yge"]
@@ -15,14 +16,15 @@ shader = ExtResource("5_lquwl")
 shader_parameter/source_panorama = ExtResource("6_7mycd")
 shader_parameter/exposure = 1.0
 
-[sub_resource type="Sky" id="Sky_efxa6"]
+[sub_resource type="Sky" id="Sky_dg77c"]
 sky_material = SubResource("ShaderMaterial_7mycd")
 
 [sub_resource type="Environment" id="Environment_x8p52"]
 background_mode = 2
-sky = SubResource("Sky_efxa6")
+sky = SubResource("Sky_dg77c")
 
 [node name="bomberman" type="Node3D" unique_id=662595357]
+script = ExtResource("1_4c57u")
 
 [node name="light" type="DirectionalLight3D" parent="." unique_id=156880996]
 transform = Transform3D(1, 0, 0, 0, 0.985996, 0.16676874, 0, -0.16676874, 0.985996, 5, 8.754368, 13.3079)
@@ -30,8 +32,19 @@ light_specular = 0.0
 shadow_enabled = true
 shadow_opacity = 0.6
 
-[node name="player" parent="." unique_id=2072773866 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.549369, 0.83983135, 0.8121054)
+[node name="player" parent="." unique_id=2072773866 node_paths=PackedStringArray("heart_container", "score_label") instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4543004, 0.83983135, 0.4898417)
+heart_container = NodePath("../HUD/HeartContainer")
+score_label = NodePath("../HUD/Score")
+spawn_point = Vector3(0, 0, 0)
+
+[node name="player2" parent="." unique_id=1874509690 node_paths=PackedStringArray("heart_container", "score_label") instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.303099, 0.83983135, 0.8121054)
+prefix = "p2"
+nom = "Joueur 2"
+heart_container = NodePath("../HUD/HeartContainer2")
+score_label = NodePath("../HUD/Score2")
+spawn_point = Vector3(14, 1, 14)
 
 [node name="ennemi" parent="." unique_id=257806008 instance=ExtResource("2_5vw27")]
 script = ExtResource("3_kek77")
@@ -59,6 +72,25 @@ offset_top = 7.0
 offset_right = 145.0
 offset_bottom = 47.0
 theme_override_constants/separation = 3
+
+[node name="HeartContainer2" type="HBoxContainer" parent="HUD" unique_id=1812050253]
+offset_left = 1041.0
+offset_top = 9.0
+offset_right = 1177.0
+offset_bottom = 49.0
+theme_override_constants/separation = 3
+
+[node name="Score" type="Label" parent="HUD" unique_id=1318510928]
+offset_left = 9.0
+offset_top = 80.0
+offset_right = 49.0
+offset_bottom = 103.0
+
+[node name="Score2" type="Label" parent="HUD" unique_id=779000566]
+offset_left = 1016.0
+offset_top = 80.0
+offset_right = 1056.0
+offset_bottom = 103.0
 
 [node name="GridMap" type="GridMap" parent="." unique_id=1714787730]
 mesh_library = ExtResource("7_272bh")
