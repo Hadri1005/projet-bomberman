@@ -5,6 +5,7 @@ const GRAVITY = 9.8
 const GRID_MIN = 0
 const GRID_MAX = 14
 const TIMEOUT_DEPLACEMENT = 3.0
+const DIRECTIONS: Array[Vector2i] = [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]
 
 static var cellules_reservees: Dictionary = {}
 
@@ -65,18 +66,15 @@ func aller_vers(cible: Vector2, timeout: float) -> bool:
 
 func deplacement_bot() -> void:
 	while is_inside_tree():
-		var directions: Array[Vector2i] = [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]
-		directions.shuffle()
-
 		var direction_choisie := Vector2i.ZERO
-		var cible_trouvee := false
-		for d: Vector2i in directions:
-			if is_libre(cellule_actuelle + d):
-				direction_choisie = d
-				cible_trouvee = true
-				break
 
-		if not cible_trouvee:
+		if randf() < 0.5:
+			direction_choisie = direction_vers_player()
+
+		if direction_choisie == Vector2i.ZERO:
+			direction_choisie = direction_aleatoire_libre()
+
+		if direction_choisie == Vector2i.ZERO:
 			await get_tree().create_timer(randf_range(0.5, 1.5)).timeout
 			continue
 
@@ -117,4 +115,30 @@ func get_spawn_cell() -> Vector2i:
 			randi_range(GRID_MIN + 5, GRID_MAX))
 		if is_libre(tmp):
 			return tmp
+	return Vector2i.ZERO
+
+func direction_vers_player() -> Vector2i:
+	var joueur := get_tree().get_first_node_in_group("player") as Node3D
+	if joueur == null:
+		return Vector2i.ZERO
+
+	var cible := Vector2i(floori(joueur.global_position.x), floori(joueur.global_position.z))
+
+	var meilleure := Vector2i.ZERO
+	var meilleure_dist := Vector2(cellule_actuelle - cible).length()
+	for d: Vector2i in DIRECTIONS:
+		var voisin: Vector2i = cellule_actuelle + d
+		if not is_libre(voisin):
+			continue
+		var dist := Vector2(voisin - cible).length()
+		if dist < meilleure_dist:
+			meilleure_dist = dist
+			meilleure = d
+	return meilleure
+	
+func direction_aleatoire_libre() -> Vector2i:
+	DIRECTIONS.shuffle()
+	for d: Vector2i in DIRECTIONS:
+		if is_libre(cellule_actuelle + d):
+			return d
 	return Vector2i.ZERO
