@@ -9,10 +9,29 @@ var is_moving = false
 var move_direction = Vector3.ZERO
 var blink_tween: Tween = null
 
-# Joueurs qui ignorent encore la collision avec cette bombe
 var ignored_players: Array[Node3D] = []
 
+var grid_map: GridMap
+@export var ground_item: int = 3 
+@export var destructible_wall_item: int = 5  
+@export var ground_orientation: int = 23
+@export var explosion_radius: int = 6 
+
+
+const DIRECTIONS := [
+	Vector3i(1, 0, 0),
+	Vector3i(-1, 0, 0),
+	Vector3i(0, 0, 1),
+	Vector3i(0, 0, -1),
+]
+
 func _ready():
+	grid_map = get_tree().get_first_node_in_group("grid_map")
+	if grid_map == null:
+		# Plan B : on cherche n'importe quelle GridMap dans la scène
+		grid_map = _find_grid_map(get_tree().current_scene)
+	if grid_map == null:
+		push_warning("Bombe : aucune GridMap trouvée (groupe 'grid_map' manquant ?)")
 	$Timer.wait_time = FUSE_TIME
 	$Timer.one_shot = true
 	$Timer.start()
@@ -24,11 +43,18 @@ func _ready():
 	blink_timer.timeout.connect(start_blinking)
 	blink_timer.start()
 
+func _find_grid_map(node: Node) -> GridMap:
+	if node is GridMap:
+		return node
+	for child in node.get_children():
+		var found = _find_grid_map(child)
+		if found:
+			return found
+	return null
+
 
 func _physics_process(delta):
-	# Retire l'exception seulement quand le joueur est entierement sorti du volume de collision
 	for player in ignored_players.duplicate():
-		# Verifie que le joueur existe encore (reload de scene, mort, etc.)
 		if not is_instance_valid(player):
 			ignored_players.erase(player)
 			continue
@@ -48,7 +74,6 @@ func _physics_process(delta):
 		velocity.z = move_direction.z * KICK_SPEED
 		move_and_slide()
 		if is_on_wall():
-			# Deferred pour eviter le crash physics_frame depuis _physics_process
 			call_deferred("explode")
 			is_moving = false
 	else:
@@ -69,7 +94,6 @@ func kick(direction: Vector3):
 		return
 	move_direction = get_cardinal_vector(direction)
 	is_moving = true
-	# On met le timer en pause pendant que la bombe est en deplacement
 	$Timer.paused = true
 
 func get_cardinal_vector(dir: Vector3) -> Vector3:
@@ -87,15 +111,57 @@ func _on_timer_timeout():
 	explode()
 
 func explode():
-	if not is_inside_tree():
+
+	if not is_inside_tree() or is_queued_for_deletion():
 		return
 	if blink_tween:
 		blink_tween.kill()
-	var explosion = EXPLOSION_SCENE.instantiate()
-	get_tree().current_scene.add_child(explosion)
-	explosion.global_position = global_position
+
+	if grid_map == null:
+		var explosion = EXPLOSION_SCENE.instantiate()
+		get_tree().current_scene.add_child(explosion)
+		explosion.global_position = global_position
+		queue_free()
+		return
+
+	var origin_cell := grid_map.local_to_map(grid_map.to_local(global_position))
+
+	_spawn_explosion(origin_cell)
+
+	for dir in DIRECTIONS:
+		for i in range(1, explosion_radius + 1):
+			var cell: Vector3i = origin_cell + dir * i
+			if _destroy_wall_at(cell):
+				_spawn_explosion(cell)
+				break
+			if _is_solid(cell):
+				break
+			_spawn_explosion(cell)
+
 	queue_free()
 
+func _spawn_explosion(cell: Vector3i) -> void:
+	var explosion = EXPLOSION_SCENE.instantiate()
+	get_tree().current_scene.add_child(explosion)
+	var pos := grid_map.to_global(grid_map.map_to_local(cell))
+	pos.y = global_position.y
+	explosion.global_position = pos
+
+func _destroy_wall_at(cell: Vector3i) -> bool:
+	for dy in [0, 1, -1]:
+		var c := Vector3i(cell.x, cell.y + dy, cell.z)
+		if grid_map.get_cell_item(c) == destructible_wall_item:
+			grid_map.set_cell_item(c, ground_item, ground_orientation)
+			return true
+	return false
+
+func _is_solid(cell: Vector3i) -> bool:
+	for dy in [0, 1, -1]:
+		var item := grid_map.get_cell_item(Vector3i(cell.x, cell.y + dy, cell.z))
+		if item != GridMap.INVALID_CELL_ITEM and item != ground_item:
+			return true
+	return false
+	
 func start_blinking():
 	blink_tween = create_tween().set_loops()
 	blink_tween.tween_property($Sprite3D, "modulate", Color.RED, 0.15)

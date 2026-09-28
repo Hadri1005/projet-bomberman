@@ -12,7 +12,7 @@ texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jv1jh"]
 
-[node name="breakable-wall" type="MeshInstance3D" unique_id=512429125]
+[node name="breakable-wall" type="MeshInstance3D" unique_id=512429125 groups=["destructible_wall"]]
 mesh = SubResource("BoxMesh_cgsnb")
 surface_material_override/0 = SubResource("StandardMaterial3D_3jnti")
 
