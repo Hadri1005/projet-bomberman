@@ -77,4 +77,3 @@ visible = false
 
 [node name="bonus" parent="." unique_id=1981284698 instance=ExtResource("10_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5021791, 0.77842474, 4.46688)
-type = 0

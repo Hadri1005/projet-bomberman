@@ -30,4 +30,5 @@ func appliquer_effet(joueur: Node3D) -> void:
 			if joueur.has_method("add_bomb_capacity"):
 				joueur.add_bomb_capacity(1)
 		TypeBonus.PORTEE:
-			pass
+			if joueur.has_method("add_explosion_radius"):
+				joueur.add_explosion_radius(1)

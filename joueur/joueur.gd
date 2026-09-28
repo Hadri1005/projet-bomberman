@@ -15,6 +15,8 @@ const HEART_IMAGE = preload("res://assets/IconsOutline_16px/Icon51.png")
 @export var max_bombs: int = 1
 var bombs_placed = 0
 var last_move_direction = Vector3.FORWARD
+var bomb_radius: int = 1  
+
 
 func _ready() -> void:
 	current_health = max_health
@@ -103,6 +105,7 @@ func _input(event):
 func place_bomb():
 	var bomb = BOMB_SCENE.instantiate()
 	get_tree().current_scene.add_child(bomb)
+	bomb.explosion_radius = bomb_radius
 	
 	var cell = grid_map.local_to_map(grid_map.to_local(global_position))
 	var snapped_pos = grid_map.to_global(grid_map.map_to_local(cell))
@@ -132,3 +135,6 @@ func get_cardinal_vector(dir: Vector3) -> Vector3:
 func add_bomb_capacity(amount: int = 1) -> void:
 	max_bombs += amount
 	print("Max bombs: ", max_bombs)
+
+func add_explosion_radius(amount: int) -> void:
+	bomb_radius += amount

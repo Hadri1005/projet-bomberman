@@ -15,7 +15,7 @@ var grid_map: GridMap
 @export var ground_item: int = 3 
 @export var destructible_wall_item: int = 5  
 @export var ground_orientation: int = 23
-@export var explosion_radius: int = 6 
+@export var explosion_radius: int = 1 
 
 
 const DIRECTIONS := [
