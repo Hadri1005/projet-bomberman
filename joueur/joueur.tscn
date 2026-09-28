@@ -161,7 +161,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=2072773866]
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=2072773866 groups=["player"]]
 collision_mask = 3
 script = ExtResource("1_bgbhk")
 

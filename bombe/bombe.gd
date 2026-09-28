@@ -111,7 +111,6 @@ func _on_timer_timeout():
 	explode()
 
 func explode():
-
 	if not is_inside_tree() or is_queued_for_deletion():
 		return
 	if blink_tween:
@@ -125,6 +124,7 @@ func explode():
 		return
 
 	var origin_cell := grid_map.local_to_map(grid_map.to_local(global_position))
+	var hit_cells: Array[Vector3i] = [origin_cell]
 
 	_spawn_explosion(origin_cell)
 
@@ -133,12 +133,35 @@ func explode():
 			var cell: Vector3i = origin_cell + dir * i
 			if _destroy_wall_at(cell):
 				_spawn_explosion(cell)
+				hit_cells.append(cell)
 				break
 			if _is_solid(cell):
 				break
 			_spawn_explosion(cell)
+			hit_cells.append(cell)
 
+	_hit_entities_in(hit_cells)
 	queue_free()
+	
+func _hit_entities_in(cells: Array[Vector3i]) -> void:
+	# Ennemis : disparaissent
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if _is_in_cells(enemy, cells):
+			enemy.queue_free()
+
+	# Joueurs : prennent des dégâts
+	for player in get_tree().get_nodes_in_group("player"):
+		if _is_in_cells(player, cells) and player.has_method("take_damage"):
+			player.take_damage()
+
+func _is_in_cells(body: Node3D, cells: Array[Vector3i]) -> bool:
+	if not is_instance_valid(body) or body.is_queued_for_deletion():
+		return false
+	var body_cell := grid_map.local_to_map(grid_map.to_local(body.global_position))
+	for cell in cells:
+		if cell.x == body_cell.x and cell.z == body_cell.z:
+			return true
+	return false
 
 func _spawn_explosion(cell: Vector3i) -> void:
 	var explosion = EXPLOSION_SCENE.instantiate()

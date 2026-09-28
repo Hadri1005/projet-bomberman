@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c7kgil8pdm1k3"]
 
 [ext_resource type="PackedScene" uid="uid://fjp4ytm60k1j" path="res://joueur/joueur.tscn" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://b6mdtuu1flkjn" path="res://button.gd" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dgdlguhju0fcm" path="res://ennemi/ennemi.tscn" id="2_5vw27"]
 [ext_resource type="PackedScene" uid="uid://c078thqfxo4xx" path="res://mort/mort.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://c8vxitds6dsny" path="res://ennemi/ennemi.gd" id="3_kek77"]
@@ -31,7 +30,7 @@ light_specular = 0.0
 shadow_enabled = true
 shadow_opacity = 0.6
 
-[node name="player" parent="." unique_id=2072773866 groups=["player"] instance=ExtResource("1_ig7tw")]
+[node name="player" parent="." unique_id=2072773866 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.549369, 0.83983135, 0.8121054)
 
 [node name="ennemi" parent="." unique_id=257806008 instance=ExtResource("2_5vw27")]
@@ -48,14 +47,6 @@ script = ExtResource("3_kek77")
 
 [node name="ennemi5" parent="." unique_id=585835748 instance=ExtResource("2_5vw27")]
 script = ExtResource("3_kek77")
-
-[node name="Button" type="Button" parent="." unique_id=762563097]
-offset_left = 2.0
-offset_top = 110.0
-offset_right = 46.0
-offset_bottom = 141.0
-text = "Dmg"
-script = ExtResource("2_0xm2m")
 
 [node name="mort" parent="." unique_id=1865817844 instance=ExtResource("3_h2yge")]
 visible = false
@@ -87,6 +78,3 @@ visible = false
 [node name="bonus" parent="." unique_id=1981284698 instance=ExtResource("10_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5021791, 0.77842474, 4.46688)
 type = 0
-
-[connection signal="pressed" from="Button" to="player" method="_on_button_pressed"]
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

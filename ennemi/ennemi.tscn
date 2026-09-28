@@ -61,7 +61,7 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_m527v"]
 size = Vector3(0.6748047, 0.77874756, 0.6869507)
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=2072773866]
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=2072773866 groups=["enemy"]]
 script = ExtResource("1_m527v")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=669150896]
