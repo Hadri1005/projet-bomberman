@@ -40,16 +40,6 @@ func is_mur(cell: Vector2i) -> bool:
 func is_libre(cell: Vector2i) -> bool:
 	return not is_mur(cell) and not cellules_reservees.has(cell)
 
-func direction_name(d: Vector2i) -> String:
-	if d == Vector2i(1, 0):
-		return "east"
-	elif d == Vector2i(-1, 0):
-		return "west"
-	elif d == Vector2i(0, 1):
-		return "south"
-	else:
-		return "north"
-
 func aller_vers(cible: Vector2, timeout: float) -> bool:
 	var ecoule := 0.0
 	while Vector2(position.x, position.z).distance_to(cible) > 0.05:
@@ -81,8 +71,7 @@ func deplacement_bot() -> void:
 		var nouvelle_cellule: Vector2i = cellule_actuelle + direction_choisie
 		cellules_reservees[nouvelle_cellule] = self
 
-		direction_actuelle = direction_name(direction_choisie)
-		sprite.play("walk_" + direction_actuelle)
+		sprite.play("walk")
 
 		var cible_xz := Vector2(nouvelle_cellule.x + 0.5, nouvelle_cellule.y + 0.5)
 		var ok: bool = await aller_vers(cible_xz, TIMEOUT_DEPLACEMENT)
@@ -105,7 +94,7 @@ func deplacement_bot() -> void:
 
 		velocity.x = 0
 		velocity.z = 0
-		sprite.play("idle_" + direction_actuelle)
+		sprite.play("idle")
 		await get_tree().create_timer(0.5).timeout
 
 func get_spawn_cell() -> Vector2i:
@@ -137,8 +126,7 @@ func direction_vers_player() -> Vector2i:
 	return meilleure
 	
 func direction_aleatoire_libre() -> Vector2i:
-	DIRECTIONS.shuffle()
-	for d: Vector2i in DIRECTIONS:
-		if is_libre(cellule_actuelle + d):
-			return d
-	return Vector2i.ZERO
+	var libres := DIRECTIONS.filter(func(d: Vector2i) -> bool: return is_libre(cellule_actuelle + d))
+	if libres.is_empty():
+		return Vector2i.ZERO
+	return libres.pick_random()
