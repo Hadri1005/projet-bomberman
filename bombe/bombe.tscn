@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cmruawhwk1h8s" path="res://bombe/bombe.gd" id="1_blhvy"]
 [ext_resource type="Texture2D" uid="uid://cy86we6p6jses" path="res://assets/Objects/Egg item.png" id="1_mpodx"]
+[ext_resource type="PackedScene" uid="uid://btktsy1execqj" path="res://bonus/bonus.tscn" id="2_qy0pg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_blhvy"]
 
@@ -13,6 +14,7 @@ atlas = ExtResource("1_mpodx")
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=587597456]
 collision_layer = 2
 script = ExtResource("1_blhvy")
+bonus_scene = ExtResource("2_qy0pg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1809496990]
 transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, 0, 0, 0)

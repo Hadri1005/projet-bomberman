@@ -17,6 +17,8 @@ var grid_map: GridMap
 @export var destructible_wall_item: int = 5  
 @export var ground_orientation: int = 23
 @export var explosion_radius: int = 1 
+@export var bonus_scene: PackedScene
+@export_range(0.0, 1.0) var bonus_drop_chance: float = 0.2  # 1/5
 
 
 const DIRECTIONS := [
@@ -176,9 +178,21 @@ func _destroy_wall_at(cell: Vector3i) -> bool:
 		var c := Vector3i(cell.x, cell.y + dy, cell.z)
 		if grid_map.get_cell_item(c) == destructible_wall_item:
 			grid_map.set_cell_item(c, ground_item, ground_orientation)
+			_try_spawn_bonus(c)
 			return true
 	return false
-
+	
+func _try_spawn_bonus(cell: Vector3i) -> void:
+	if bonus_scene == null:
+		return
+	var r := randf()
+	if r >= bonus_drop_chance:
+		return
+	var bonus = bonus_scene.instantiate()
+	bonus.type = randi_range(0, 1)
+	get_tree().current_scene.add_child(bonus)
+	bonus.global_position = grid_map.to_global(grid_map.map_to_local(cell)) + Vector3(0, 1.0, 0)
+	
 func _is_solid(cell: Vector3i) -> bool:
 	for dy in [0, 1, -1]:
 		var item := grid_map.get_cell_item(Vector3i(cell.x, cell.y + dy, cell.z))
