@@ -10,6 +10,7 @@ const DIRECTIONS: Array[Vector2i] = [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1
 static var cellules_reservees: Dictionary = {}
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
+@onready var zone_contact: Area3D = $Area3D
 var direction_actuelle := "south"
 var cellule_actuelle: Vector2i
 
@@ -17,6 +18,7 @@ func _ready() -> void:
 	cellule_actuelle = get_spawn_cell()
 	cellules_reservees[cellule_actuelle] = self
 	position = Vector3(cellule_actuelle.x + 0.5, 1, cellule_actuelle.y + 0.5)
+	zone_contact.body_entered.connect(_on_zone_contact_body_entered)
 	deplacement_bot()
 
 func _exit_tree() -> void:
@@ -26,6 +28,10 @@ func liberer_mes_cellules() -> void:
 	for cell in cellules_reservees.keys():
 		if cellules_reservees[cell] == self:
 			cellules_reservees.erase(cell)
+
+func _on_zone_contact_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player") and body.has_method("take_damage"):
+		body.take_damage()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -124,7 +130,7 @@ func direction_vers_player() -> Vector2i:
 			meilleure_dist = dist
 			meilleure = d
 	return meilleure
-	
+
 func direction_aleatoire_libre() -> Vector2i:
 	var libres := DIRECTIONS.filter(func(d: Vector2i) -> bool: return is_libre(cellule_actuelle + d))
 	if libres.is_empty():

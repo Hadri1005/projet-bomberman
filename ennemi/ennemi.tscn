@@ -59,7 +59,9 @@ animations = [{
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m527v"]
-size = Vector3(0.6748047, 0.77874756, 0.6869507)
+size = Vector3(0.9, 0.9, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vj2c"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=2072773866 groups=["enemy"]]
 script = ExtResource("1_m527v")
@@ -73,5 +75,9 @@ animation = &"idle"
 frame_progress = 0.69607854
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1937988932]
-transform = Transform3D(1.04, 0, 0, 0, 1.88, 0, 0, 0, 1.005, 0.0055859387, 0.020208739, 0.008986354)
 shape = SubResource("BoxShape3D_m527v")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1215741574]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=890805021]
+shape = SubResource("BoxShape3D_5vj2c")
