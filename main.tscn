@@ -36,7 +36,7 @@ shadow_opacity = 0.6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4543004, 0.83983135, 0.4898417)
 heart_container = NodePath("../HUD/HeartContainer")
 score_label = NodePath("../HUD/Score")
-spawn_point = Vector3(0, 0, 0)
+spawn_point = Vector3(0, 0.89, 0)
 
 [node name="player2" parent="." unique_id=1874509690 node_paths=PackedStringArray("heart_container", "score_label") instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.303099, 0.83983135, 0.8121054)
