@@ -41,6 +41,7 @@ func update_score_label() -> void:
 		score_label.text = "%s : %d kills" % [nom, kills]
 
 func take_damage() -> void:
+	$hitsound.play()
 	current_health = clampi(current_health - 1, 0, max_health)
 	update_heart_display()
 	global_position = spawn_point

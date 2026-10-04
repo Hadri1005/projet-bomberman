@@ -144,6 +144,9 @@ func explode():
 			hit_cells.append(cell)
 
 	_hit_entities_in(hit_cells)
+	$explosionSound.play()
+	$Sprite3D.hide()
+	await $explosionSound.finished
 	queue_free()
 	
 func _hit_entities_in(cells: Array[Vector3i]) -> void:
@@ -152,6 +155,7 @@ func _hit_entities_in(cells: Array[Vector3i]) -> void:
 			if is_instance_valid(owner_player) and owner_player.has_method("add_kill"):
 				owner_player.add_kill()
 			enemy.queue_free()
+			$enemykill.play()
 
 	for player in get_tree().get_nodes_in_group("player"):
 		if _is_in_cells(player, cells) and player.has_method("take_damage"):

@@ -1,17 +1,14 @@
 extends Node3D
 
+var defaite := false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
-	# S'assure que la camera de mort n'est pas active au demarrage
-	$Camera3D.current = false
+	if defaite:
+		$music_defaite.play()
+	else:
+		$music_victoire.play()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
 func _on_restart_button_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()

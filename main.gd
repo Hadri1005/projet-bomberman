@@ -29,6 +29,7 @@ func _ready() -> void:
 	p2_layer = player2.collision_layer
 	p2_mask = player2.collision_mask
 	desactiver_joueur2()
+	$music.play()
 
 # ---------- Caméras ----------
 func _setup_split_screen() -> void:
@@ -43,7 +44,7 @@ func _setup_split_screen() -> void:
 		ref.queue_free()
 
 	split = CanvasLayer.new()
-	split.layer = 0   # sous le HUD (qui est au-dessus)
+	split.layer = 0
 	add_child(split)
 
 	var v1 := _creer_vue()
@@ -74,7 +75,7 @@ func _appliquer_layout() -> void:
 	if pvp:
 		cont1.anchor_right = 0.5
 		cont2.anchor_left = 0.5
-		cont1.offset_right = -1   # petite séparation entre les deux vues
+		cont1.offset_right = -1
 		cont2.offset_left = 1
 		cont2.show()
 	else:
@@ -128,7 +129,7 @@ func _verifier_joueurs() -> void:
 		return
 	if not pvp:
 		if player1.current_health <= 0:
-			fin_de_partie("Défaite...")
+			fin_de_partie("Défaite...", true)
 		return
 	var vivants := [player1, player2].filter(func(j): return j.current_health > 0)
 	if vivants.size() == 2:
@@ -155,10 +156,12 @@ func _verifier_ennemis() -> void:
 	else:
 		fin_de_partie("Égalité (%d kills chacun) !" % player1.kills)
 
-func fin_de_partie(texte: String) -> void:
+func fin_de_partie(texte: String, defaite := false) -> void:
 	partie_finie = true
+	$music.stop()
 	split.hide()
 	var ecran := VICTOIRE_SCENE.instantiate()
+	ecran.defaite = defaite
 	add_child(ecran)
 	ecran.get_node("Label").text = texte
 	ecran.get_node("Camera3D").make_current()

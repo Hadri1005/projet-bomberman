@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://b3jiwc7v374bo"]
 
+[ext_resource type="Script" uid="uid://cd8hfy3ah6plh" path="res://play/mainmenu.gd" id="1_3j3ga"]
 [ext_resource type="Texture2D" uid="uid://bd1is4wc1i6of" path="res://assets/sky/sky_100_2k.png" id="1_jjntt"]
 [ext_resource type="Script" uid="uid://4rmm0ib27yi8" path="res://play/play.gd" id="2_fh22g"]
 [ext_resource type="Texture2D" uid="uid://dp5a7xiwouvh2" path="res://assets/Characters/Basic Charakter Spritesheet.png" id="2_ogyno"]
 [ext_resource type="Script" uid="uid://6fhn8bag5106" path="res://play/joueurMenu.gd" id="3_j1i6c"]
+[ext_resource type="AudioStream" uid="uid://cawprs6gs3vn1" path="res://assets/b423b42.wav" id="5_avvrt"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aw4yl"]
 panorama = ExtResource("1_jjntt")
@@ -178,6 +180,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_3j3ga")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=871357480]
 environment = SubResource("Environment_hnoe2")
@@ -223,3 +226,6 @@ script = ExtResource("3_j1i6c")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=674998189]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 3.3, 5.27)
 current = true
+
+[node name="music" type="AudioStreamPlayer3D" parent="." unique_id=2027122539]
+stream = ExtResource("5_avvrt")

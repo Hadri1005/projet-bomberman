@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cmruawhwk1h8s" path="res://bombe/bombe.gd" id="1_blhvy"]
 [ext_resource type="Texture2D" uid="uid://cy86we6p6jses" path="res://assets/Objects/Egg item.png" id="1_mpodx"]
 [ext_resource type="PackedScene" uid="uid://btktsy1execqj" path="res://bonus/bonus.tscn" id="2_qy0pg"]
+[ext_resource type="AudioStream" uid="uid://tscehs31i0ne" path="res://assets/8bit_bomb_explosion.wav" id="4_0h8eb"]
+[ext_resource type="AudioStream" uid="uid://wtd01h8rs68r" path="res://assets/HealthAndDamageSystemSFX/Damage/Medium/Kick/UIGlitch_Kick_HA_HealthDmg_08.wav" id="5_8ewx7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_blhvy"]
 
@@ -36,3 +38,9 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=264030107]
 transform = Transform3D(1.365, 0, 0, 0, 1.365, 0, 0, 0, 1.365, 0, 0, 0)
 shape = SubResource("BoxShape3D_1nppc")
+
+[node name="explosionSound" type="AudioStreamPlayer3D" parent="." unique_id=535799559]
+stream = ExtResource("4_0h8eb")
+
+[node name="enemykill" type="AudioStreamPlayer3D" parent="." unique_id=811135258]
+stream = ExtResource("5_8ewx7")
